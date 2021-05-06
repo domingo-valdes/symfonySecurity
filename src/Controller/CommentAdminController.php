@@ -7,7 +7,11 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+* @IsGranted("ROLE_ADMIN")
+ */
 class CommentAdminController extends Controller
 {
     /**
@@ -15,6 +19,7 @@ class CommentAdminController extends Controller
      */
     public function index(CommentRepository $repository, Request $request, PaginatorInterface $paginator)
     {
+
         $q = $request->query->get('q');
 
         $queryBuilder = $repository->getWithSearchQueryBuilder($q);
